@@ -6,7 +6,7 @@ Summary(pl):	Zestaw narzêdzi do tworzenia i kompilowania kodu obiektowego w jêzy
 Name:		ruby-rockit
 Version:	0.4.0
 %define cvs 20041122
-Release:	1
+Release:	0.%{cvs}.1
 License:	LGPL
 Group:		Development/Libraries
 Source0:	rockit-%{version}-%{cvs}.tar.gz
@@ -39,7 +39,7 @@ cp %{SOURCE1} .
 #EOF
 
 cd lib
-for I in *.rb; do 
+for I in *.rb; do
 	BASE="$(echo $I | sed -e 's!.rb!!')"
 	perl -pi -e "s#require '$BASE'#require 'rockit/$BASE'#" *.rb
 done
