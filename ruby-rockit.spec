@@ -13,7 +13,7 @@ Source0:	http://dl.sourceforge.net/rockit/rockit-%{verstr}.tar.gz
 Patch0:	ruby-rockit-memoize-optional.patch
 URL:		http://rockit.sourceforge.net/
 BuildRequires:	ruby
-BuildArch:	noarch
+#BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
