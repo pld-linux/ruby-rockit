@@ -24,7 +24,7 @@ phases of compiler construction.
 %description -l pl
 £atwy w u¿yciu zestaw narzêdzi do tworzenia i kompilowania kodu
 obiektowego napisany i generuj±cy kod w jêzyku Ruby. Aktualnie skupia
-siê na front-endowej czê¶ci tworzenia kompilatora.
+siê na frontendowej czê¶ci tworzenia kompilatora.
 
 %prep
 %setup -q -n rockit-%{verstr}
