@@ -1,0 +1,123 @@
+diff -ur o-rockit/lib/grammar.rb rockit/lib/grammar.rb
+--- o-rockit/lib/grammar.rb	2001-06-11 08:13:16.000000000 -0600
++++ rockit/lib/grammar.rb	2004-11-22 01:27:16.945102802 -0700
+@@ -109,7 +109,7 @@
+   end
+ 
+   def ==(other)
+-    other.type == self.type and other.sub_elements == @sub_elements
++    other.class == self.class and other.sub_elements == @sub_elements
+   end
+ 
+   protected
+@@ -356,7 +356,7 @@
+   attr_accessor :tree_builder
+ 
+   def initialize(nonterminal, elements, treeBuilder = nil)
+-    nonterminal = NonTerminal.new(nonterminal) if nonterminal.type == String
++    nonterminal = NonTerminal.new(nonterminal) if nonterminal.class == String
+     @nonterminal = make_element(nonterminal)
+     @elements = make_elements(elements)
+     init_tree_builder(treeBuilder)
+@@ -385,7 +385,7 @@
+ 
+   def ==(other)
+     #Profiler.__enter__("Production#==".intern, other)
+-    res = other.type == self.type and
++    res = other.class == self.class and
+       nonterminal == other.nonterminal and
+       elements == other.elements and
+       tree_builder == other.tree_builder
+@@ -434,7 +434,7 @@
+   end
+ 
+   def nonterm_to_symbol(o)
+-    return o unless o.type == NonTerminal
++    return o unless o.class == NonTerminal
+     if o.name.include? "'"
+       as_code('"' + o.name + '".intern')
+     else
+@@ -585,7 +585,7 @@
+     def initialize
+     end
+     def ==(other)
+-      other.type == self.type
++      other.class == self.class
+     end
+   end
+   EpsilonToken = EpsilonTokenType.new
+diff -ur o-rockit/lib/token.rb rockit/lib/token.rb
+--- o-rockit/lib/token.rb	2001-06-20 05:25:16.000000000 -0600
++++ rockit/lib/token.rb	2004-11-22 01:26:15.308706328 -0700
+@@ -4,7 +4,7 @@
+ 
+ class TokenRegexp < Regexp
+   def initialize(aStringOrRegexp)
+-    if aStringOrRegexp.type == String
++    if aStringOrRegexp.class == String
+       @string = aStringOrRegexp
+       @string = "^(" + @string + ")" unless @string[0,1] == "^"
+       super @string
+@@ -28,7 +28,7 @@
+ 
+ # Short hands for composing token regexp's
+ def tr(aStringOrRegexp)
+-  aStringOrRegexp = aStringOrRegexp.source if aStringOrRegexp.type == Regexp
++  aStringOrRegexp = aStringOrRegexp.source if aStringOrRegexp.class == Regexp
+   TokenRegexp.new(aStringOrRegexp)
+ end
+ 
+@@ -69,7 +69,7 @@
+   end
+   
+   def hash
+-    @hashvalue || (@hashvalue = [type, @name, @regexp, @skip].hash)
++    @hashvalue || (@hashvalue = [class, @name, @regexp, @skip].hash)
+   end
+ 
+   def parse_options(options)
+@@ -84,7 +84,7 @@
+   end
+ 
+   def ==(other)
+-    other.type == self.type and 
++    other.class == self.class and 
+       other.name == name and
+       other.regexp.inspect == regexp.inspect and
+       other.skip == skip
+@@ -139,7 +139,7 @@
+   end
+ 
+   def ==(other)
+-    other.type == self.type
++    other.class == self.class
+   end
+ end
+ 
+@@ -152,7 +152,7 @@
+   end
+ 
+   def ==(other)
+-    other.type == self.type
++    other.class == self.class
+   end
+ end
+ 
+@@ -167,7 +167,7 @@
+   end
+ 
+   def hash
+-    @hashvalue || (@hashvalue = [type, @name, @string].hash)
++    @hashvalue || (@hashvalue = [class, @name, @string].hash)
+   end
+ 
+   def to_s
+@@ -195,7 +195,7 @@
+ end
+ 
+ def t(name, re, *options)
+-  if re.type == String
++  if re.class == String
+     StringToken.new("StrToken" + re.hash.inspect, re)
+   else
+     Token.new(name, re, *options)
