@@ -1,4 +1,4 @@
-#%define ruby_archdir    %(ruby -r rbconfig -e 'print Config::CONFIG["archdir"]')
+#%define	ruby_archdir	%(ruby -r rbconfig -e 'print Config::CONFIG["archdir"]')
 %define ruby_rubylibdir %(ruby -r rbconfig -e 'print Config::CONFIG["rubylibdir"]')
 Summary:	Ruby O-o Compiler construction toolKIT
 Summary(pl):	Zestaw narzêdzi do tworzenia i kompilowania kodu obiektowego w jêzyku Ruby
