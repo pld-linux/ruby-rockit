@@ -8,6 +8,7 @@ Release:	1
 License:	LGPL
 Source0:	http://dl.sourceforge.net/rockit/rockit-%{verstr}.tar.gz
 # Source0-md5:	c09760f6bc47edb37e656f3179304a94
+Patch0:	ruby-rockit-memoize-optional.patch
 Group:		Development/Libraries
 URL: http://rockit.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -21,14 +22,28 @@ compiler construction.
 
 %prep
 %setup -q -n rockit-%{verstr}
+%patch0 -p1
 
 %build
+cat > lib/version.rb <<EOF
+def rockit_version
+  "%{version}"
+end
+EOF
+
+cd lib
+for I in *.rb; do 
+	BASE="$(echo $I | sed -e 's!.rb!!')"
+	perl -pi -e "s#require '$BASE'#require 'rockit/$BASE'#" *.rb
+done
+cd -
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/%{ruby_rubylibdir}/rockit/
 install -d $RPM_BUILD_ROOT/%{_bindir}
-cp -a lib/* $RPM_BUILD_ROOT/%{ruby_rubylibdir}/rockit/
+
+install lib/* $RPM_BUILD_ROOT/%{ruby_rubylibdir}/rockit/
 
 echo '#!/usr/bin/ruby' > $RPM_BUILD_ROOT/%{_bindir}/rockit
 cat lib/rockit.rb >> $RPM_BUILD_ROOT/%{_bindir}/rockit
