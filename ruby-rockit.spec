@@ -12,6 +12,7 @@ Group:		Development/Libraries
 Source0:	rockit-%{version}-%{cvs}.tar.gz
 # Source0-md5:	432242f6a2627530ffab052cc495d19b
 Source1:	setup.rb
+Patch0:	rockit-class.patch
 URL:		http://rockit.sourceforge.net/
 BuildRequires:	ruby
 #BuildArch:	noarch
@@ -29,6 +30,7 @@ siê na frontendowej czê¶ci tworzenia kompilatora.
 
 %prep
 %setup -q -n rockit
+%patch0 -p1
 
 %build
 cp %{SOURCE1} .
@@ -47,7 +49,7 @@ cd -
 
 mkdir bin
 mkdir tmplib/rockit -p
-mv lib/rockit.rb bin/rockit
+cp lib/rockit.rb bin/rockit
 mv lib/* tmplib/rockit
 mv tmplib/* lib/
 
@@ -89,6 +91,7 @@ rm -rf $RPM_BUILD_ROOT
 %{ruby_ridir}/DefaultInitHash
 %{ruby_ridir}/DirectedGraph
 %{ruby_ridir}/DotGraph
+%{ruby_ridir}/DotGraphFormatter
 %{ruby_ridir}/DotGraphPrinter
 %{ruby_ridir}/Element
 %{ruby_ridir}/EofToken
@@ -124,11 +127,14 @@ rm -rf $RPM_BUILD_ROOT
 %{ruby_ridir}/ProductionPriorities
 %{ruby_ridir}/ReduceActionsGenerator
 %{ruby_ridir}/ReferencingRegexpLexer
+%{ruby_ridir}/RegexpToken
 %{ruby_ridir}/Relation
+%{ruby_ridir}/RelationCircularityException
 %{ruby_ridir}/Rockit
 %{ruby_ridir}/SourceCodeDumpable
 %{ruby_ridir}/StackPath
 %{ruby_ridir}/SyntaxTree
+%{ruby_ridir}/SyntaxTreeAsDotGraph
 %{ruby_ridir}/SyntaxTreeBuilder
 %{ruby_ridir}/TerminalSet
 %{ruby_ridir}/Token
