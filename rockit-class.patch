@@ -72,7 +72,7 @@ diff -ur o-rockit/lib/token.rb rockit/lib/token.rb
    
    def hash
 -    @hashvalue || (@hashvalue = [type, @name, @regexp, @skip].hash)
-+    @hashvalue || (@hashvalue = [class, @name, @regexp, @skip].hash)
++    @hashvalue || (@hashvalue = [self.class, @name, @regexp, @skip].hash)
    end
  
    def parse_options(options)
@@ -108,7 +108,7 @@ diff -ur o-rockit/lib/token.rb rockit/lib/token.rb
  
    def hash
 -    @hashvalue || (@hashvalue = [type, @name, @string].hash)
-+    @hashvalue || (@hashvalue = [class, @name, @string].hash)
++    @hashvalue || (@hashvalue = [self.class, @name, @string].hash)
    end
  
    def to_s
