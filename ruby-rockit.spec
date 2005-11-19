@@ -1,6 +1,3 @@
-#%define	ruby_archdir	%(ruby -r rbconfig -e 'print Config::CONFIG["archdir"]')
-%define	ruby_ridir	%(ruby -r rbconfig -e 'include Config; print File.join(CONFIG["datadir"], "ri", CONFIG["ruby_version"], "system")')
-%define ruby_rubylibdir %(ruby -r rbconfig -e 'print Config::CONFIG["rubylibdir"]')
 Summary:	Ruby O-o Compiler construction toolKIT
 Summary(pl):	Zestaw narzêdzi do tworzenia i kompilowania kodu obiektowego w jêzyku Ruby
 Name:		ruby-rockit
@@ -12,8 +9,9 @@ Group:		Development/Libraries
 Source0:	rockit-%{version}-%{cvs}.tar.gz
 # Source0-md5:	432242f6a2627530ffab052cc495d19b
 Source1:	setup.rb
-Patch0:	rockit-class.patch
+Patch0:		rockit-class.patch
 URL:		http://rockit.sourceforge.net/
+BuildRequires:	rpmbuild(macros) >= 1.263
 BuildRequires:	ruby
 #BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -31,8 +29,6 @@ siê na frontendowej czê¶ci tworzenia kompilatora.
 %prep
 %setup -q -n rockit
 %patch0 -p1
-
-%build
 cp %{SOURCE1} .
 #cat > lib/version.rb <<EOF
 #def rockit_version
@@ -47,12 +43,12 @@ for I in *.rb; do
 done
 cd -
 
-mkdir bin
-mkdir tmplib/rockit -p
+mkdir -p bin tmplib/rockit
 cp lib/rockit.rb bin/rockit
 mv lib/* tmplib/rockit
 mv tmplib/* lib/
 
+%build
 ruby setup.rb config \
 	--siterubyver=%{ruby_rubylibdir}
 ruby setup.rb setup
