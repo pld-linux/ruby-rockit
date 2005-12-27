@@ -3,7 +3,7 @@ Summary(pl):	Zestaw narzêdzi do tworzenia i kompilowania kodu obiektowego w jêzy
 Name:		ruby-rockit
 Version:	0.4.0
 %define cvs 20041122
-Release:	0.%{cvs}.1
+Release:	0.%{cvs}.2
 License:	LGPL
 Group:		Development/Libraries
 Source0:	rockit-%{version}-%{cvs}.tar.gz
@@ -12,7 +12,7 @@ Source1:	setup.rb
 Patch0:		rockit-class.patch
 URL:		http://rockit.sourceforge.net/
 BuildRequires:	rpmbuild(macros) >= 1.263
-BuildRequires:	ruby
+BuildRequires:	ruby-modules
 #BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
