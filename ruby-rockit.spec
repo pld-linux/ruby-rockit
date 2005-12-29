@@ -11,9 +11,10 @@ Source0:	rockit-%{version}-%{cvs}.tar.gz
 Source1:	setup.rb
 Patch0:		rockit-class.patch
 URL:		http://rockit.sourceforge.net/
-BuildRequires:	rpmbuild(macros) >= 1.263
+BuildRequires:	rpmbuild(macros) >= 1.277
 BuildRequires:	ruby-modules
 #BuildArch:	noarch
+%ruby_mod_ver_requires_eq
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
