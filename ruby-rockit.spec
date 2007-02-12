@@ -1,5 +1,5 @@
 Summary:	Ruby O-o Compiler construction toolKIT
-Summary(pl):	Zestaw narzêdzi do tworzenia i kompilowania kodu obiektowego w jêzyku Ruby
+Summary(pl.UTF-8):   Zestaw narzÄ™dzi do tworzenia i kompilowania kodu obiektowego w jÄ™zyku Ruby
 Name:		ruby-rockit
 Version:	0.4.0
 %define cvs 20041122
@@ -22,10 +22,10 @@ An easy-to-use, object-oriented compiler construction toolkit written
 in and generating code for Ruby. Currently focusing on the "front-end"
 phases of compiler construction.
 
-%description -l pl
-£atwy w u¿yciu zestaw narzêdzi do tworzenia i kompilowania kodu
-obiektowego napisany i generuj±cy kod w jêzyku Ruby. Aktualnie skupia
-siê na frontendowej czê¶ci tworzenia kompilatora.
+%description -l pl.UTF-8
+Åatwy w uÅ¼yciu zestaw narzÄ™dzi do tworzenia i kompilowania kodu
+obiektowego napisany i generujÄ…cy kod w jÄ™zyku Ruby. Aktualnie skupia
+siÄ™ na frontendowej czÄ™Å›ci tworzenia kompilatora.
 
 %prep
 %setup -q -n rockit
