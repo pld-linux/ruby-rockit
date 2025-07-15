@@ -29,7 +29,7 @@ się na frontendowej części tworzenia kompilatora.
 
 %prep
 %setup -q -n rockit
-%patch0 -p1
+%patch -P0 -p1
 cp %{SOURCE1} .
 #cat > lib/version.rb <<EOF
 #def rockit_version
